@@ -1,0 +1,129 @@
+<LoginScreen>:
+    GridLayout:
+        cols: 1
+        GridLayout: 
+            padding: 15,15
+            spacing: 20,20
+            cols: 1
+            Label:
+                text: "User Login"
+                font_size: "20sp"
+            TextInput:
+                id : user
+                hint_text: "User Name"
+            TextInput:
+                id: pas
+                hint_text: "password"
+            RelativeLayout:
+                Button:
+                    text: "Login"
+                    on_press: root.get_login(root.ids.user.text, root.ids.pas.text)
+                    size_hint: 0.3, 0.5
+                    pos_hint: {'center_x': 0.5, 'center_y':0.6}
+                    # background_color: 0,0,1,1
+            Label:
+                id: login_wrong
+                text: ""
+                color: .8,0,0,1
+        GridLayout:
+            size_hint: 0.2,0.2
+            padding: 10,10
+            spacing: 10,0
+            cols: 2
+            Button:
+                text: "Forgot Password"
+                background_color: 1,1,1,0
+                opacity: 1 if self.state == 'normal' else 0.5
+                color: 0.1,0.7,1,1
+                on_press: root.forgot()
+            Button:
+                background_color: 1,1,1,0
+                opacity: 1 if self.state == 'normal' else 0.5
+                color: 0.1,0.7,1,1
+                on_press: root.signup()
+                text: "Sign_up"
+
+<SignupScreen>:
+    GridLayout:
+        cols: 1
+        padding: 10,10
+        spacing: 10,10
+        Label:
+            text: "Sign up for a space journy!"
+            font_size: '20sp'
+        TextInput:
+            id: uname
+            hint_text: "User Name"
+        TextInput:
+            id: pword
+            hint_text: "password"
+        Label:
+        	id: sign_up_text
+        	text: ""
+        RelativeLayout:
+	        Button:
+	            on_press: root.add_user(root.ids.uname.text,root.ids.pword.text)
+	            text: "signup"
+	            size_hint: 0.3, 0.5
+                pos_hint: {'center_x': 0.5, 'center_y':0.6}
+        
+<SignupScreenSuccess>:
+	GridLayout:
+		cols:1
+		Label:
+			text: "successfully signed in :)"
+		Button:
+			size_hint: 0.5,0.5
+			on_press: root.go_back()
+			text: "login"
+			
+<LoginScreenSuccess>:
+	GridLayout:
+		cols:1
+		padding: 30,30
+		spacing: 30,30
+		RelativeLayout:
+            ImageButton: 
+                on_press: root.logout()
+                source: 'logout_hover.png' if self.hovered else "logout_nothover.png"
+                size_hint: 0.35, 0.35
+                pos_hint: {'center_x': 0.82, 'center_y': 0.8}
+		TextInput:
+			id: feel
+			hint_text: "How are your feeling ? try: Happy,sad,unloved"
+		Button:
+			on_press : root.get_quote(root.ids.feel.text)
+			text: "Enlighten me"
+        ScrollView:
+            Label:
+                id: quote
+                text: ""
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
+
+<ForgotPassword>:
+	GridLayout:
+		cols: 1
+		Label:
+			text: "Nothing can be DONE :( \n Create a new account"
+		RelativeLayout:
+	        Button:
+	            on_press: root.signup()
+	            text: "signup"
+	            size_hint: 0.3, 0.3
+                pos_hint: {'center_x': 0.5, 'center_y':0.6}
+		
+
+<RootWidget>:
+    LoginScreen:
+        name: "login_screen"
+    SignupScreen:
+        name: "signup_screen"
+    SignupScreenSuccess:
+    	name: "signup_screen_success"
+    LoginScreenSuccess:
+    	name: "login_screen_success"
+    ForgotPassword:
+    	name: "forgot_pas"
+    
